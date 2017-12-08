@@ -17,6 +17,7 @@ def use_feature(func):
 
 @use_feature
 def bin_spatial(img, size=(32, 32)):
+    """Return bin spatial features of the given image."""
     color1 = cv2.resize(img[:, :, 0], size).ravel()
     color2 = cv2.resize(img[:, :, 1], size).ravel()
     color3 = cv2.resize(img[:, :, 2], size).ravel()

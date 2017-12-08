@@ -62,7 +62,7 @@ def search_windows(img, size2windows, classifier):
 def multi_scale_windows(img):
     """Return dict of size -> a list of window positions"""
     size2windows = {
-        64:  slide_window(img, y_top=380, y_bottom=500, xy_window=(64, 64), xy_overlap=(0.7, 0.8)),
+        64:  slide_window(img, x_left=150, x_right=1150, y_top=380, y_bottom=500, xy_window=(64, 64), xy_overlap=(0.7, 0.8)),
         85:  slide_window(img, y_top=380, y_bottom=500, xy_window=(85, 85), xy_overlap=(0.7, 0.8)),
         100: slide_window(img, y_top=400, y_bottom=600, xy_window=(100, 100), xy_overlap=(0.7, 0.8)),
         200: slide_window(img, y_top=400, y_bottom=650, xy_window=(200, 200), xy_overlap=(0.7, 0.8))
@@ -125,11 +125,8 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from skimage import io
 
-    # image = io.imread('test_images/test1.jpg')
-    # feature_extract.get_combined_feature(image[0:64, 0:64, :])
-
-    fig, ax = plt.subplots(3, 2)
-    for i in range(0, 3):
+    fig, ax = plt.subplots(4, 2)
+    for i in range(0, 4):
         for j in range(0, 2):
             image = io.imread('test_images/test{}.jpg'.format(i * 2 + j + 1))
 

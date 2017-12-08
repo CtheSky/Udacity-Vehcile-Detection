@@ -39,10 +39,15 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser('Display processed image.')
     parser.add_argument('-f', default='test_images/test1.jpg', help='path to test image')
+    parser.add_argument('-d', default=False, help='show result of each stage of pipeline')
+    parser.add_argument('-o', default=None, help='path to output image')
     args = parser.parse_args()
 
     image = io.imread(args.f)
-    process_image(image, debug=True)
+    result = process_image(image, debug=args.d)
+
+    output = args.o if args.o else args.f.replace('.', '_output.')
+    io.imsave(output, result)
 
 
 

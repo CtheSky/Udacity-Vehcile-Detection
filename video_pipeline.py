@@ -31,7 +31,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser('Process video.')
-    parser.add_argument('-f', default='project_video.mp4', help='path to video')
+    parser.add_argument('-f', default='test_videos/test_video.mp4', help='path to video')
     parser.add_argument('-o', default=None, help='path to output video')
     args = parser.parse_args()
 

@@ -1,6 +1,6 @@
 import os
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC, LinearSVC
+from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
@@ -38,31 +38,4 @@ def get_classifier(use_cache=True):
 
 
 if __name__ == '__main__':
-    features = feature_extract.get_features()
-    labels = load_dataset.get_labels().reshape(-1)
-
-    clf = get_classifier()
-
-    y_pred = clf.predict(features)
-
-    from sklearn.metrics import precision_score, recall_score, accuracy_score
-    print('acc:')
-    print(accuracy_score(labels, y_pred))
-
-    print('precision:')
-    print(precision_score(labels, y_pred))
-
-    print('recall:')
-    print(recall_score(labels, y_pred))
-
-    print('change decision func')
-    y_pred = clf.decision_function(features) > 0.5
-
-    print('acc:')
-    print(accuracy_score(labels, y_pred))
-
-    print('precision:')
-    print(precision_score(labels, y_pred))
-
-    print('recall:')
-    print(recall_score(labels, y_pred))
+    train_classifier()

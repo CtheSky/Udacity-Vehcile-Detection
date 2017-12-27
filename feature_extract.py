@@ -2,6 +2,8 @@ import cv2
 import os
 import numpy as np
 from skimage import feature
+from skimage import color
+from skimage.util import img_as_ubyte
 
 import load_dataset
 
@@ -36,7 +38,8 @@ def color_hist(img, nbins=32, bins_range=(0, 256)):
 
 @use_feature
 def hog_feature(img, feature_vectore=True):
-    """Return the HOG features of the given image"""
+    """Return the HOG features based on YUV channels of the given image"""
+    img = img_as_ubyte(color.rgb2yuv(img))
 
     # parameters to tune
     orient = 9

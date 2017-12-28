@@ -20,35 +20,10 @@ and describe how I addressed each point in my implementation.
 Three features are used here in [feature_extract.py](feature_extract.py):
 * bin spatial feature with resized 32x32 image
 * rgb color histogram feature with bin number of 32
-* histogram of oriented gradients (HOG) of all three channels
-```python
-@use_feature
-def bin_spatial(img, size=(32, 32)):
-    """Return bin spatial features of the given image."""
-    ...
-
-@use_feature
-def color_hist(img, nbins=32, bins_range=(0, 256)):
-    """Return the RGB features of the given image"""
-    ...
-
-@use_feature
-def hog_feature(img, feature_vectore=True):
-    """Return the HOG features of the given image"""
-
-    # parameters to tune
-    orient = 9
-    pix_per_cell = 8
-    cell_per_block = 2
-    ...
-```
-Tried some combinations like HSV + HOG of grayscale, RGB + HOG of grayscale and only HOG of grayscale.
-But the test accuracy is around 95%, at last I use the HOG of all three channels and also the bin spatial
-and rgb features:
-![hog_example](examples/HOG_example.jpg)
+* histogram of oriented gradients (HOG) of YUV channels
 
 ### Classifier
-A Linear SVM is trained in [classifier.py](classifier.py) using `sklearn`:
+A Linear SVC is trained in [classifier.py](classifier.py) using `sklearn`:
 ```python
 clf = Pipeline([
     ("scaler", StandardScaler()), # feature is normalized before feeding to classifier
@@ -59,7 +34,7 @@ Data comes from a combination of the [GTI vehicle image database](http://www.gti
 the [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/), and 
 examples extracted from the project video itself. 
   
-Using 10% data as validation set, the validation accuracy is 98.7%.
+Using 10% data as validation set, the validation accuracy is 99.1%.
 
 ### Sliding Window
 Four different window sizes are used to search possible areas in [sliding_window.py](sliding_window.py):
